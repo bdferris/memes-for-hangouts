@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2013 Brian Ferris <bdferris@gmail.com>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<Module>
+  <ModulePrefs title="Deal With It" height="100" width="100">
+    <Require feature="dynamic-height"/>
+    <Require feature="rpc"/>
+    <Require feature="views" />
+  </ModulePrefs>
+  <Content type="html"><![CDATA[
+<!DOCTYPE html>
+<script src="https://talkgadget.google.com/hangouts/_/api/hangout.js?v=1.4" ></script>
+<style>
+div.content {
+  margin: 10px;
+}
+</style>
+
+<div class="content">
+<input type="button" value="Deal With It" onclick="handleDealWithItClick()">
+</div>
+
+<script>
+
+function handleDealWithItClick() {
+  var shadesResource = gapi.hangout.av.effects.createImageResource(
+      'https://googledrive.com/host/0B2T8yNIP0VUQcGxlUy1RbEhTUXM/Shades.png');
+  var shadesOverlay = shadesResource.createFaceTrackingOverlay({
+    'trackingFeature': gapi.hangout.av.effects.FaceTrackingFeature.NOSE_ROOT,
+    'scaleWithFace': true,
+    'rotateWithFace': false,
+    'scale': 1.5,
+    'offset': {'x': -0.05, 'y': -1.05}});
+  shadesOverlay.setVisible(true);
+
+  var textResource = gapi.hangout.av.effects.createImageResource(
+    'https://googledrive.com/host/0B2T8yNIP0VUQcGxlUy1RbEhTUXM/DealWithIt.png');
+  var textOverlay = textResource.createOverlay({
+    'position': {'x': 0.0, 'y': 0.35}});
+  textOverlay.setScale(0.75, gapi.hangout.av.effects.ScaleReference.WIDTH);
+
+  var hideOverlays = function() {
+    shadesOverlay.setVisible(false);
+    textOverlay.setVisible(false);
+  };
+
+  var updateOverlays = function() {
+    var offset = shadesOverlay.getOffset();
+    offset.y += 0.1;
+    shadesOverlay.setOffset(offset);
+    if (offset.y >= -0.05) {
+      textOverlay.setVisible(true); 
+      window.setTimeout(hideOverlays, 2000);
+    } else {
+      window.setTimeout(updateOverlays, 80);
+    }
+  };
+
+  window.setTimeout(updateOverlays, 80);
+}
+
+</script>
+<br/>
+]]></Content>
+</Module>

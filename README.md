@@ -1,4 +1,4 @@
 memes-for-hangouts
 ==================
 
-Extensions to meme-ify your Google Hangout.
+Extensions to meme-ify your Google Hangouts.

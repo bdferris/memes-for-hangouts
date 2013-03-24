@@ -37,7 +37,7 @@ div.content {
 
 function handleDealWithItClick() {
   var shadesResource = gapi.hangout.av.effects.createImageResource(
-      'https://raw.github.com/bdferris/memes-for-hangouts/master/Shades.png');
+      'https://raw.github.com/bdferris/memes-for-hangouts/master/images/Shades.png');
   var shadesOverlay = shadesResource.createFaceTrackingOverlay({
     'trackingFeature': gapi.hangout.av.effects.FaceTrackingFeature.NOSE_ROOT,
     'scaleWithFace': true,
@@ -47,7 +47,7 @@ function handleDealWithItClick() {
   shadesOverlay.setVisible(true);
 
   var textResource = gapi.hangout.av.effects.createImageResource(
-    'https://raw.github.com/bdferris/memes-for-hangouts/master/DealWithIt.png');
+    'https://raw.github.com/bdferris/memes-for-hangouts/master/images/DealWithIt.png');
   var textOverlay = textResource.createOverlay({
     'position': {'x': 0.0, 'y': 0.35}});
   textOverlay.setScale(0.75, gapi.hangout.av.effects.ScaleReference.WIDTH);
